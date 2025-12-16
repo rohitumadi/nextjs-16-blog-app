@@ -9,4 +9,5 @@ export const postSchema = z.object({
     .string()
     .min(10, "Content must be at least 3 characters long")
     .max(1000, "Content must be at most 1000 characters long"),
+  image: z.instanceof(File),
 });

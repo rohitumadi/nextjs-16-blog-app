@@ -11,23 +11,74 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { postSchema } from "@/app/schemas/blog";
+import { postSchema } from "@/app/schemas/post";
 import z from "zod";
 import { Field } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const CreatePost = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const generateUploadUrl = useMutation(api.posts.generatePresignedUrl);
+  const createPost = useMutation(api.posts.createPost);
+
   const form = useForm({
     resolver: zodResolver(postSchema),
     defaultValues: {
       title: "",
       content: "",
+      image: undefined,
     },
   });
-  const onSubmit = async (data: z.infer<typeof postSchema>) => {};
+
+  const onSubmit = async (data: z.infer<typeof postSchema>) => {
+    setIsLoading(true);
+    try {
+      if (!data.image) {
+        toast.error("Please select an image");
+        return;
+      }
+
+      // Step 1: Get a short-lived upload URL
+      const postUrl = await generateUploadUrl();
+
+      // Step 2: POST the file to the URL
+      const result = await fetch(postUrl, {
+        method: "POST",
+        headers: { "Content-Type": data.image.type },
+        body: data.image,
+      });
+
+      if (!result.ok) {
+        throw new Error(`Upload failed: ${result.statusText}`);
+      }
+
+      const { storageId } = await result.json();
+
+      // Step 3: Save the newly allocated storage id to the database
+      const postId = await createPost({
+        title: data.title,
+        content: data.content,
+        imageStorageId: storageId,
+      });
+
+      toast.success("Post created successfully");
+      form.reset();
+      router.push(`/post/${postId}`);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to create post";
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="py-12">
@@ -61,6 +112,33 @@ const CreatePost = () => {
                         id="title"
                         type="text"
                         {...field}
+                      />
+                      {fieldState.error && (
+                        <p className="text-red-500">
+                          {fieldState.error.message}
+                        </p>
+                      )}
+                    </Field>
+                  )}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Controller
+                  name="image"
+                  control={form.control}
+                  render={({ field, fieldState }) => (
+                    <Field>
+                      <Label htmlFor="image">Image</Label>
+                      <Input
+                        className="cursor-pointer"
+                        aria-invalid={fieldState.invalid}
+                        id="image"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) field.onChange(file);
+                        }}
                       />
                       {fieldState.error && (
                         <p className="text-red-500">
