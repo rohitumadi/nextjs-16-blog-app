@@ -45,7 +45,7 @@ const CommentsSection = () => {
     }
   };
 
-  const commentCount = comments?.length || "0";
+  const commentCount = comments?.length || 0;
   return (
     <Card>
       <CardHeader className="flex items-center gap-2 border-b">

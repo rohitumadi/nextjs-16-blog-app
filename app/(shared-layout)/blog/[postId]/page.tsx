@@ -4,8 +4,27 @@ import { Id } from "@/convex/_generated/dataModel";
 import { fetchQuery } from "convex/nextjs";
 import Image from "next/image";
 
+import { Metadata } from "next";
+
 interface PostIdRouteProps {
   params: Promise<{ postId: Id<"posts"> }>;
+}
+
+export async function generateMetadata({
+  params,
+}: PostIdRouteProps): Promise<Metadata> {
+  const { postId } = await params;
+  const post = await fetchQuery(api.posts.getPostById, { id: postId });
+  if (!post) {
+    return {
+      title: "Post Not Found",
+      description: "The post you are looking for does not exist.",
+    };
+  }
+  return {
+    title: post.title,
+    description: post.content.slice(0, 100),
+  };
 }
 
 const BlogPage = async ({ params }: PostIdRouteProps) => {

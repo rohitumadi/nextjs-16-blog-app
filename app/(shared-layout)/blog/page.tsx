@@ -13,6 +13,13 @@ import { fetchQuery } from "convex/nextjs";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "All Blogs",
+  description: "Read the latest trends and insights from our community.",
+};
+
 const BlogPage = async () => {
   return (
     <div className="py-12">
