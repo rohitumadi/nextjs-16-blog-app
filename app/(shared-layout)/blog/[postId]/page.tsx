@@ -5,6 +5,8 @@ import { fetchQuery } from "convex/nextjs";
 import Image from "next/image";
 
 import { Metadata } from "next";
+import PostPresence from "@/components/web/PostPresence";
+import { getToken } from "@/lib/auth-server";
 
 interface PostIdRouteProps {
   params: Promise<{ postId: Id<"posts"> }>;
@@ -29,7 +31,11 @@ export async function generateMetadata({
 
 const BlogPage = async ({ params }: PostIdRouteProps) => {
   const { postId } = await params;
-  const post = await fetchQuery(api.posts.getPostById, { id: postId });
+  const token = await getToken();
+  const [post, userId] = await Promise.all([
+    fetchQuery(api.posts.getPostById, { id: postId }),
+    fetchQuery(api.presence.getUserId, {}, { token }),
+  ]);
 
   return (
     <div className="m-12 flex flex-col gap-4">
@@ -50,6 +56,7 @@ const BlogPage = async ({ params }: PostIdRouteProps) => {
       <p className="text-sm text-muted-foreground">
         Posted on {new Date(post._creationTime).toLocaleDateString()}
       </p>
+      {userId && <PostPresence roomId={postId} userId={userId} />}
       <p className="text-lg">{post.content}</p>
       <CommentsSection />
     </div>
