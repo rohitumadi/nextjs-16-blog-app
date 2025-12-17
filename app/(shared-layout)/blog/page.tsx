@@ -46,7 +46,7 @@ async function LoadBlogList() {
     <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {posts?.map((post) => (
         <Card key={post._id} className="pt-0">
-          <div className="relative h-48 w-full overflow-hidden rounded-t-lg ">
+          <div className="relative aspect-video w-full overflow-hidden rounded-t-lg ">
             <Image
               src={
                 post.imgUrl ??
@@ -54,7 +54,7 @@ async function LoadBlogList() {
               }
               alt={post.title}
               fill
-              className="object-cover"
+              className=" hover:scale-105 transition-all duration-300"
             />
           </div>
           <CardHeader>

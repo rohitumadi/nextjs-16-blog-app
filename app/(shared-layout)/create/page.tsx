@@ -70,7 +70,7 @@ const CreatePost = () => {
 
       toast.success("Post created successfully");
       form.reset();
-      router.push(`/post/${postId}`);
+      router.push(`/blog/${postId}`);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Failed to create post";
