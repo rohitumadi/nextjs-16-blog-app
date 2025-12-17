@@ -18,7 +18,7 @@ const BlogPage = async () => {
     <div className="py-12">
       <div className="text-center">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
-          Blog
+          Blogs
         </h1>
         <p className="mt-6 text-lg leading-8 text-muted-foreground">
           Read about the latest trends and insights.
@@ -63,7 +63,7 @@ async function LoadBlogList() {
           <CardFooter>
             <Link
               className={buttonVariants({ className: "w-full" })}
-              href={`/post/${post._id}`}
+              href={`/blog/${post._id}`}
             >
               Read More
             </Link>

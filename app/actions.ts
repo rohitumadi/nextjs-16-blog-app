@@ -57,5 +57,5 @@ export const createPostAction = async (data: z.infer<typeof postSchema>) => {
     { token }
   );
 
-  return redirect(`/blogs/${postId}`);
+  return redirect(`/blog/${postId}`);
 };

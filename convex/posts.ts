@@ -43,6 +43,26 @@ export const getAllPosts = query({
   },
 });
 
+//get post by id
+export const getPostById = query({
+  args: {
+    id: v.id("posts"),
+  },
+  handler: async (ctx, args) => {
+    const post = await ctx.db.get(args.id);
+    if (!post) {
+      throw new Error("Post not found");
+    }
+    const imgUrl = post.imageStorageId
+      ? await ctx.storage.getUrl(post.imageStorageId)
+      : null;
+    return {
+      ...post,
+      imgUrl,
+    };
+  },
+});
+
 //generate presigned url for image
 export const generatePresignedUrl = mutation({
   handler: async (ctx) => {

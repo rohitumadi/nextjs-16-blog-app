@@ -28,8 +28,8 @@ export function Navbar() {
       link: "/",
     },
     {
-      name: "Blogs",
-      link: "/blogs",
+      name: "Blog",
+      link: "/blog",
     },
     {
       name: "Create",
