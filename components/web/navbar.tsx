@@ -19,6 +19,7 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { UserMenu } from "./user-menu";
 
 export function Navbar() {
   const router = useRouter();
@@ -78,13 +79,7 @@ export function Navbar() {
                 </NavbarButton>
               </>
             ) : (
-              <Button
-                className="cursor-pointer"
-                onClick={handleLogout}
-                disabled={isLoggingOut}
-              >
-                {isLoggingOut ? <Spinner /> : "Logout"}
-              </Button>
+              <UserMenu isLoggingOut={isLoggingOut} onLogout={handleLogout} />
             )}
 
             <ModeToggle />

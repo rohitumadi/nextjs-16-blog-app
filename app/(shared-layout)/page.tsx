@@ -13,7 +13,7 @@ import * as motion from "motion/react-client";
 const HomePage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-100px)] py-12 lg:py-24">
-      <div className="container px-4 md:px-6">
+      <div className="px-4 md:px-6">
         <div className="flex flex-col items-center space-y-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
