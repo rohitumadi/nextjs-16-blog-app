@@ -101,6 +101,8 @@
    CONVEX_DEPLOYMENT=your-convex-deployment
    NEXT_PUBLIC_CONVEX_URL=https://your-project.convex.cloud
    SITE_URL=http://localhost:3000
+   # Same as NEXT_PUBLIC_CONVEX_URL but ends in .site not cloud
+   NEXT_PUBLIC_CONVEX_SITE_URL=https://your-project.convex.site
    ```
 
 5. **Run the development server**
