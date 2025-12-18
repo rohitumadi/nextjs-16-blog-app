@@ -22,13 +22,13 @@ const HomePage = () => {
             transition={{ duration: 0.5 }}
             className="space-y-4"
           >
-            <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
-              ✨ Welcome to the future of blogging
+            <div className="inline-flex items-center dark:text-white rounded-full border border-primary/20 bg-primary/40 px-3 py-1 text-sm font-medium ">
+              <span className="mr-2">✨</span> Welcome to the future of blogging
             </div>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none bg-clip-text text-transparent bg-linear-to-r from-primary to-primary/60">
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none bg-clip-text text-transparent bg-linear-to-r from-primary via-primary to-primary/40">
               Share Your Story <br /> With The World
             </h1>
-            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+            <p className="mx-auto max-w-[700px] text-foreground/80 dark:text-white md:text-xl font-medium">
               Discover stories, thinking, and expertise from writers on any
               topic. Join our community and start your journey today.
             </p>

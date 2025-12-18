@@ -20,6 +20,7 @@ import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { UserMenu } from "./user-menu";
+import { SearchInput } from "./SearchInput";
 
 export function Navbar() {
   const router = useRouter();
@@ -79,7 +80,10 @@ export function Navbar() {
                 </NavbarButton>
               </>
             ) : (
-              <UserMenu isLoggingOut={isLoggingOut} onLogout={handleLogout} />
+              <>
+                <SearchInput />
+                <UserMenu isLoggingOut={isLoggingOut} onLogout={handleLogout} />
+              </>
             )}
 
             <ModeToggle />
@@ -90,6 +94,11 @@ export function Navbar() {
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
+            {isAuthenticated && (
+              <div className="flex-1 mx-2">
+                <SearchInput />
+              </div>
+            )}
             <MobileNavToggle
               isOpen={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

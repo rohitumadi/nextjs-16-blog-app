@@ -45,7 +45,7 @@ async function LoadBlogList() {
   return (
     <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {posts?.map((post) => (
-        <Card key={post._id} className="pt-0">
+        <Card key={post._id} className="pt-0 h-full">
           <div className="relative aspect-video w-full overflow-hidden rounded-t-lg ">
             <Image
               src={
@@ -58,16 +58,16 @@ async function LoadBlogList() {
             />
           </div>
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">
+            <CardTitle className="text-lg truncate font-semibold">
               {post.title}
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="grow">
             <p className="text-sm text-muted-foreground line-clamp-3">
               {post.content}
             </p>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="">
             <Link
               className={buttonVariants({ className: "w-full" })}
               href={`/blog/${post._id}`}
