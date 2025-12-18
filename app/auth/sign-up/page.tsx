@@ -21,6 +21,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
+import Link from "next/link";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -59,8 +60,8 @@ const SignUpPage = () => {
         <CardTitle>Sign up</CardTitle>
         <CardDescription>Create an account to get started</CardDescription>
         <CardAction>
-          <Button className="cursor-pointer" variant="link">
-            Log in
+          <Button asChild className="cursor-pointer" variant="link">
+            <Link href="/auth/login">Log in</Link>
           </Button>
         </CardAction>
       </CardHeader>

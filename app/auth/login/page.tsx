@@ -21,6 +21,7 @@ import z from "zod";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -64,8 +65,8 @@ const LoginPage = () => {
         <CardTitle>Log in</CardTitle>
         <CardDescription>Log in to your account</CardDescription>
         <CardAction>
-          <Button className="cursor-pointer" variant="link">
-            Sign up
+          <Button asChild className="cursor-pointer" variant="link">
+            <Link href="/auth/signup">Sign up</Link>
           </Button>
         </CardAction>
       </CardHeader>
