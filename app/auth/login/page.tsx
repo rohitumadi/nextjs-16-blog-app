@@ -66,7 +66,7 @@ const LoginPage = () => {
         <CardDescription>Log in to your account</CardDescription>
         <CardAction>
           <Button asChild className="cursor-pointer" variant="link">
-            <Link href="/auth/signup">Sign up</Link>
+            <Link href="/auth/sign-up">Sign up</Link>
           </Button>
         </CardAction>
       </CardHeader>
