@@ -12,11 +12,11 @@ interface PostPresenceProps {
 const PostPresence = ({ roomId, userId }: PostPresenceProps) => {
   const presenceState = usePresence(api.presence, roomId, userId);
   return (
-    <div className="flex items-center gap-2 ">
+    <div className="relative z-50 flex items-center gap-2">
       <p className="text-xs uppercase tracking-wide text-muted-foreground">
         Viewing now
       </p>
-      <div className="text-black z-10">
+      <div className="text-black">
         <FacePile presenceState={presenceState || []} />
       </div>
     </div>
