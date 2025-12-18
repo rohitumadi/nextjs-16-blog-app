@@ -16,7 +16,7 @@ const PostPresence = ({ roomId, userId }: PostPresenceProps) => {
       <p className="text-xs uppercase tracking-wide text-muted-foreground">
         Viewing now
       </p>
-      <div className="text-black">
+      <div className="text-black z-10">
         <FacePile presenceState={presenceState || []} />
       </div>
     </div>
