@@ -43,6 +43,7 @@ const SignUpPage = () => {
       fetchOptions: {
         onSuccess: () => {
           toast.success("Sign up successful");
+          router.refresh();
           router.push("/");
           setIsLoading(false);
         },

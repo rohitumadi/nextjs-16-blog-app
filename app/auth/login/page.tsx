@@ -42,6 +42,7 @@ const LoginPage = () => {
       fetchOptions: {
         onSuccess: () => {
           toast.success("Logged in successfully");
+          router.refresh();
           router.push("/");
           setIsLoading(false);
         },
