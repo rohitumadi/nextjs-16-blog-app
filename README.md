@@ -42,7 +42,6 @@
 
 - **Live Presence** – See who's viewing a post in real-time
 - **Comments System** – Engage with posts through comments
-- **User Mentions** – @mention autocomplete in comments
 
 ---
 
